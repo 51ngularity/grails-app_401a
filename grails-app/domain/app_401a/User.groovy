@@ -9,9 +9,11 @@ class User {
     //private Integer age = Period.between(birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now() ).years
 
     static constraints = {
-        username size: 3..20, unique: true, validator: { name -> name.matches(/\w+/)
+        username size: 3..20, unique: true, validator: { name ->
+            (name.matches(/[\p{L}\p{N}_]+/)         // only letters, numbers and "_"
+            && name.find(/\p{L}/))                  // but at least one letter
         }
-        email size: 3..255, email: true, unique: true
+        email email: true, unique: true
         password size: 10..50, validator: { pwd ->
             (pwd.find(/.\p{Lu}/)                    // uppercase letter
                     && pwd.find(/\p{Ll}/)           // lowercase letter
