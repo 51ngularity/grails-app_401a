@@ -96,8 +96,8 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         address                | result
         'a@b.com'              | 1         // valid
         'a$b.com'              | 0         // no "@" symbol
-        'a'*255+'@b.com'       | 0         // too long
-        'a'*249+'@b.com'       | 0         // valid
+        'a'*70+'@b.com'        | 0         // too long
+        'a'*60+'@b.com'        | 1         // valid
         'a@b.kom'              | 0         // wrong ending
     }
 
